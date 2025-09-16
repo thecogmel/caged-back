@@ -1,0 +1,10 @@
+[
+  {
+    "model": "address.Country",
+    "id": 1,
+    "fields": {
+      "name": "Brasil",
+      "code": "1058"
+    }
+  }
+]

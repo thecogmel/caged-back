@@ -1,0 +1,149 @@
+[
+  {
+    "model": "address.NeighborhoodType",
+    "id": 1,
+    "fields": {
+      "name": "Bairro"
+    }
+  },
+  {
+    "model": "address.NeighborhoodType",
+    "id": 2,
+    "fields": {
+      "name": "Bosque"
+    }
+  },
+  {
+    "model": "address.NeighborhoodType",
+    "id": 3,
+    "fields": {
+      "name": "Chácara"
+    }
+  },
+  {
+    "model": "address.NeighborhoodType",
+    "id": 4,
+    "fields": {
+      "name": "Conjunto"
+    }
+  },
+  {
+    "model": "address.NeighborhoodType",
+    "id": 5,
+    "fields": {
+      "name": "Desmembramento"
+    }
+  },
+  {
+    "model": "address.NeighborhoodType",
+    "id": 6,
+    "fields": {
+      "name": "Distrito"
+    }
+  },
+  {
+    "model": "address.NeighborhoodType",
+    "id": 7,
+    "fields": {
+      "name": "Favela"
+    }
+  },
+  {
+    "model": "address.NeighborhoodType",
+    "id": 8,
+    "fields": {
+      "name": "Fazenda"
+    }
+  },
+  {
+    "model": "address.NeighborhoodType",
+    "id": 9,
+    "fields": {
+      "name": "Gleba"
+    }
+  },
+  {
+    "model": "address.NeighborhoodType",
+    "id": 10,
+    "fields": {
+      "name": "Horto"
+    }
+  },
+  {
+    "model": "address.NeighborhoodType",
+    "id": 11,
+    "fields": {
+      "name": "Jardim"
+    }
+  },
+  {
+    "model": "address.NeighborhoodType",
+    "id": 12,
+    "fields": {
+      "name": "Loteamento"
+    }
+  },
+  {
+    "model": "address.NeighborhoodType",
+    "id": 13,
+    "fields": {
+      "name": "Núcleo"
+    }
+  },
+  {
+    "model": "address.NeighborhoodType",
+    "id": 14,
+    "fields": {
+      "name": "Parque"
+    }
+  },
+  {
+    "model": "address.NeighborhoodType",
+    "id": 15,
+    "fields": {
+      "name": "Residencial"
+    }
+  },
+  {
+    "model": "address.NeighborhoodType",
+    "id": 16,
+    "fields": {
+      "name": "Sítio"
+    }
+  },
+  {
+    "model": "address.NeighborhoodType",
+    "id": 17,
+    "fields": {
+      "name": "Tropical"
+    }
+  },
+  {
+    "model": "address.NeighborhoodType",
+    "id": 18,
+    "fields": {
+      "name": "Vila"
+    }
+  },
+  {
+    "model": "address.NeighborhoodType",
+    "id": 19,
+    "fields": {
+      "name": "Zona"
+    }
+  },
+  {
+    "model": "address.NeighborhoodType",
+    "id": 20,
+    "fields": {
+      "name": "Centro"
+    }
+  },
+  {
+    "model": "address.NeighborhoodType",
+    "id": 21,
+    "fields": {
+      "name": "Setor"
+    }
+  }
+]
