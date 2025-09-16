@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+  followme-redis:
+    image: redis:latest
+    networks:
+      - followme-net
+
+  followme-backend:
+    build: ./backend
+    volumes:
+      - ./backend:/opt/backend
+      - followme_data:/opt/data
+    depends_on:
+      - followme-db
+    environment:
+      - BACKEND_DOMAIN=http://localhost:8080
+      - BACKEND_API_PORT=8000
+      - BACKEND_ADMIN_EMAIL=root@followme.com
+      - BACKEND_ADMIN_PASSWORD=root
+      - BACKEND_DATA_STORAGE=/opt/data/
+      - PIPEDRIVE_KEY=da6d667e3279b2998df3960105c7a1483b548938
+      - BACKEND_REDIS_HOST=followme-redis
+      - BACKEND_REDIS_PORT=6379
+      - BACKEND_CACHE_TIMEOUT=86400
+      - BACKEND_CACHE_ENABLE=true
+    env_file: ./backend/.env
+    networks:
+      - followme-net
+    ports:
+      - 8000:8000
+
+  followme-db:
+    image: postgres:13.0-alpine
+    volumes:
+      - followme_postgres:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=db
+    ports:
+      - 5432:5432
+    networks:
+      - followme-net
+
+volumes:
+  followme_postgres:
+  followme_data:
+
+networks:
+  followme-net:

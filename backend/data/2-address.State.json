@@ -1,0 +1,245 @@
+[
+  {
+    "model": "address.State",
+    "id": 1,
+    "fields": {
+      "name": "Acre",
+      "code": "AC",
+      "country": 1
+    }
+  },
+  {
+    "model": "address.State",
+    "id": 2,
+    "fields": {
+      "name": "Alagoas",
+      "code": "AL",
+      "country": 1
+    }
+  },
+  {
+    "model": "address.State",
+    "id": 3,
+    "fields": {
+      "name": "Amazonas",
+      "code": "AM",
+      "country": 1
+    }
+  },
+  {
+    "model": "address.State",
+    "id": 4,
+    "fields": {
+      "name": "Amapa",
+      "code": "AP",
+      "country": 1
+    }
+  },
+  {
+    "model": "address.State",
+    "id": 5,
+    "fields": {
+      "name": "Bahia",
+      "code": "BA",
+      "country": 1
+    }
+  },
+  {
+    "model": "address.State",
+    "id": 6,
+    "fields": {
+      "name": "Ceara",
+      "code": "CE",
+      "country": 1
+    }
+  },
+  {
+    "model": "address.State",
+    "id": 7,
+    "fields": {
+      "name": "Distrito Federal",
+      "code": "DF",
+      "country": 1
+    }
+  },
+  {
+    "model": "address.State",
+    "id": 8,
+    "fields": {
+      "name": "Espirito Santo",
+      "code": "ES",
+      "country": 1
+    }
+  },
+  {
+    "model": "address.State",
+    "id": 9,
+    "fields": {
+      "name": "Goias",
+      "code": "GO",
+      "country": 1
+    }
+  },
+  {
+    "model": "address.State",
+    "id": 10,
+    "fields": {
+      "name": "Maranhão",
+      "code": "MA",
+      "country": 1
+    }
+  },
+  {
+    "model": "address.State",
+    "id": 11,
+    "fields": {
+      "name": "Minhas Gerais",
+      "code": "MG",
+      "country": 1
+    }
+  },
+  {
+    "model": "address.State",
+    "id": 12,
+    "fields": {
+      "name": "Mato Grosso do Sul",
+      "code": "MS",
+      "country": 1
+    }
+  },
+  {
+    "model": "address.State",
+    "id": 13,
+    "fields": {
+      "name": "Mato Grosso",
+      "code": "MT",
+      "country": 1
+    }
+  },
+  {
+    "model": "address.State",
+    "id": 14,
+    "fields": {
+      "name": "Pará",
+      "code": "PA",
+      "country": 1
+    }
+  },
+  {
+    "model": "address.State",
+    "id": 15,
+    "fields": {
+      "name": "Paraíba",
+      "code": "PB",
+      "country": 1
+    }
+  },
+  {
+    "model": "address.State",
+    "id": 16,
+    "fields": {
+      "name": "Pernambuco",
+      "code": "PE",
+      "country": 1
+    }
+  },
+  {
+    "model": "address.State",
+    "id": 17,
+    "fields": {
+      "name": "Piauí",
+      "code": "PI",
+      "country": 1
+    }
+  },
+  {
+    "model": "address.State",
+    "id": 18,
+    "fields": {
+      "name": "Paraná",
+      "code": "PR",
+      "country": 1
+    }
+  },
+  {
+    "model": "address.State",
+    "id": 19,
+    "fields": {
+      "name": "Rio de Janeiro",
+      "code": "RJ",
+      "country": 1
+    }
+  },
+  {
+    "model": "address.State",
+    "id": 20,
+    "fields": {
+      "name": "Rio Grande do Norte",
+      "code": "RN",
+      "country": 1
+    }
+  },
+  {
+    "model": "address.State",
+    "id": 21,
+    "fields": {
+      "name": "Rondônia",
+      "code": "RO",
+      "country": 1
+    }
+  },
+  {
+    "model": "address.State",
+    "id": 22,
+    "fields": {
+      "name": "Roraima",
+      "code": "RR",
+      "country": 1
+    }
+  },
+  {
+    "model": "address.State",
+    "id": 23,
+    "fields": {
+      "name": "Rio Grande do Sul",
+      "code": "RS",
+      "country": 1
+    }
+  },
+  {
+    "model": "address.State",
+    "id": 24,
+    "fields": {
+      "name": "Santa Catarina",
+      "code": "SC",
+      "country": 1
+    }
+  },
+  {
+    "model": "address.State",
+    "id": 25,
+    "fields": {
+      "name": "Sergipe",
+      "code": "SE",
+      "country": 1
+    }
+  },
+  {
+    "model": "address.State",
+    "id": 26,
+    "fields": {
+      "name": "São Paulo",
+      "code": "SP",
+      "country": 1
+    }
+  },
+  {
+    "model": "address.State",
+    "id": 27,
+    "fields": {
+      "name": "Tocantins",
+      "code": "TO",
+      "country": 1
+    }
+  }
+]
