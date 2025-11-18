@@ -21,6 +21,21 @@ class UserSerializer(serializers.ModelSerializer):
         ]
         extra_kwargs = {"password": {"write_only": True}}
 
+    def create(self, validated_data):
+        # use manager to ensure password handling is consistent
+        password = validated_data.pop("password", None)
+        # create_user will validate email presence and call set_password
+        user = User.objects.create_user(password=password, **validated_data)
+        return user
+
+    def update(self, instance, validated_data):
+        password = validated_data.pop("password", None)
+        user = super().update(instance, validated_data)
+        if password:
+            user.set_password(password)
+            user.save()
+        return user
+
 
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
