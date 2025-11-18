@@ -1,0 +1,57 @@
+# Arquivo .gitignore para projetos Django/Python com DRF, Ruff, e uv
+
+## Ambiente e Dependências
+# Pastas de ambientes virtuais
+# uv cria ambientes virtuais de forma similar ao venv/virtualenv
+/venv
+/.venv
+
+# Cache de pacotes e instalação do uv
+.uv/
+.uv/cache/
+
+## Python
+# Arquivos compilados de Python
+*.pyc
+__pycache__/
+*~$
+*.bak
+
+# Logs, bancos de dados temporários e outros
+*.log
+*.sqlite3
+
+# Arquivos de IDEs e Editores comuns (opcional, remova se não usar)
+.idea/
+.vscode/
+
+## Django e DRF
+# Arquivos de mídia e uploads (muitas vezes grandes e específicos do ambiente)
+/media/
+
+# Diretório para coleções e migrações (exceto os arquivos de migração iniciais e customizados)
+# O padrão é ignorar os arquivos de migração gerados, mas manter as pastas.
+# A pasta principal de migrações (`app/migrations/`) *deve* ser versionada,
+# mas podemos ignorar os arquivos de banco de dados específicos.
+db.sqlite3
+
+# Ignorar o diretório static gerado se estiver usando o `collectstatic`
+/static_collected/
+
+## Ferramentas de Linting e Formatação
+# Ruff não gera arquivos para ignorar, mas o cache do Python pode ser ignorado (já coberto acima)
+
+## Ferraentas de Build e Cache
+# Cache do pytest
+.pytest_cache/
+
+# Cache do mypy
+.mypy_cache/
+
+# Arquivos de distribuição
+dist/
+build/
+*.egg-info/
+
+# Cache do ruff
+.ruff_cache/
