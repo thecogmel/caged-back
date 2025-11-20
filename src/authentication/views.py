@@ -2,7 +2,8 @@ import jwt
 from django.conf import settings
 from django.shortcuts import get_object_or_404
 from rest_framework import generics, status, viewsets
-from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
+from .permissions import IsSpeakerPermission
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.serializers import TokenRefreshSerializer
@@ -27,11 +28,12 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
     def get_permissions(self):
-        # Allow only super admins to create users via /users (POST)
-        if getattr(self, "action", None) == "create":
-            permission_classes = [IsAuthenticated, IsAdminUser]
-        else:
-            permission_classes = [IsAuthenticated]
+        action = getattr(self, "action", None)
+        print(action)
+        if action in ("create", "destroy", "update", "partial_update"):
+            permission_classes = [IsAdminUser]
+        elif action in ("list", "retrieve"):
+            permission_classes = [IsSpeakerPermission]
         return [perm() for perm in permission_classes]
 
 
