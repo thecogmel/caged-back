@@ -2,15 +2,13 @@ import jwt
 from django.conf import settings
 from django.shortcuts import get_object_or_404
 from rest_framework import generics, status, viewsets
-from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
-from .permissions import IsSpeakerPermission
+from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.serializers import TokenRefreshSerializer
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 
 from .models import User
-
 from .serializers import (
     LoginSerializer,
     LogoutSerializer,
@@ -29,11 +27,10 @@ class UserViewSet(viewsets.ModelViewSet):
 
     def get_permissions(self):
         action = getattr(self, "action", None)
-        print(action)
         if action in ("create", "destroy", "update", "partial_update"):
             permission_classes = [IsAdminUser]
         elif action in ("list", "retrieve"):
-            permission_classes = [IsSpeakerPermission]
+            permission_classes = [IsAuthenticated]
         return [perm() for perm in permission_classes]
 
 

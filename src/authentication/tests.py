@@ -40,6 +40,15 @@ class UserPermissionsAndHashingTests(APITestCase):
             username="member",
             role=User.Roles.MEMBER,
         )
+        # admin user (is_staff=True) to satisfy IsAdminUser checks
+        self.admin = User.objects.create_user(
+            email="admin@example.com",
+            password="adminpass",
+            name="Admin",
+            username="admin",
+            role=User.Roles.ADMIN,
+            is_staff=True,
+        )
 
     def obtain_token(self, email, password):
         """Helper: realiza login e retorna access token."""
@@ -50,18 +59,16 @@ class UserPermissionsAndHashingTests(APITestCase):
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
         return resp.data["tokens"]["access"]
 
-    def test_create_user_only_superuser(self):
-        """Verifica que apenas superuser consegue criar usuários via POST /users/.
+    def test_create_user_only_admins(self):
+        """Verifica que apenas usuários administrativos (is_staff) conseguem criar usuários via POST /users/.
 
-        Setup: usa tokens do superuser e de um member.
-        Asserções:
-        - superuser recebe 201 (criação bem-sucedida)
-        - member recebe 403 (proibido)
+        A aplicação atual usa `IsAdminUser` para criação, que permite `is_staff=True`.
+        Portanto testamos que `admin` (is_staff) consegue criar e `member` não.
         """
         url = reverse("users-list")
 
-        # superuser cria com sucesso
-        token = self.obtain_token("su@example.com", "superpass")
+        # admin (is_staff) cria com sucesso
+        token = self.obtain_token("admin@example.com", "adminpass")
         self.client.credentials(HTTP_AUTHORIZATION=f"Bearer {token}")
         data = {
             "email": "new@example.com",
@@ -79,11 +86,11 @@ class UserPermissionsAndHashingTests(APITestCase):
         resp2 = self.client.post(url, data, format="json")
         self.assertEqual(resp2.status_code, status.HTTP_403_FORBIDDEN)
 
-    def test_list_and_retrieve_only_speaker(self):
-        """Verifica que list e retrieve são permitidos apenas para SPEAKER.
+    def test_list_and_retrieve_authenticated_users(self):
+        """Verifica que list e retrieve são permitidos a qualquer usuário autenticado.
 
-        - Speaker deve conseguir listar e recuperar um usuário específico.
-        - Member e superuser (quando não SPEAKER) não devem conseguir.
+        A aplicação atual protege list/retrieve apenas com `IsAuthenticated`,
+        então speaker, member e admin devem conseguir essas ações.
         """
         list_url = reverse("users-list")
         # create a target user to retrieve
@@ -96,35 +103,34 @@ class UserPermissionsAndHashingTests(APITestCase):
         )
         retrieve_url = reverse("users-detail", kwargs={"pk": target.pk})
 
-        # Speaker can list
+        # Speaker can list and retrieve
         token_s = self.obtain_token("speaker@example.com", "speakpass")
         self.client.credentials(HTTP_AUTHORIZATION=f"Bearer {token_s}")
         resp = self.client.get(list_url)
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
-
-        # Speaker can retrieve
         resp2 = self.client.get(retrieve_url)
         self.assertEqual(resp2.status_code, status.HTTP_200_OK)
 
-        # Member cannot list or retrieve
+        # Member can also list and retrieve (IsAuthenticated)
         token_m = self.obtain_token("member@example.com", "memberpass")
         self.client.credentials(HTTP_AUTHORIZATION=f"Bearer {token_m}")
         resp3 = self.client.get(list_url)
-        self.assertEqual(resp3.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(resp3.status_code, status.HTTP_200_OK)
         resp4 = self.client.get(retrieve_url)
-        self.assertEqual(resp4.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(resp4.status_code, status.HTTP_200_OK)
 
-        # Superuser (is_superuser True) is not SPEAKER: may be blocked by SPEAKER-only
-        token_su = self.obtain_token("su@example.com", "superpass")
-        self.client.credentials(HTTP_AUTHORIZATION=f"Bearer {token_su}")
+        # Admin (is_staff) can list and retrieve as well
+        token_admin = self.obtain_token("admin@example.com", "adminpass")
+        self.client.credentials(HTTP_AUTHORIZATION=f"Bearer {token_admin}")
         resp5 = self.client.get(list_url)
-        self.assertEqual(resp5.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(resp5.status_code, status.HTTP_200_OK)
 
-    def test_destructive_actions_only_superuser(self):
-        """Verifica que update/partial_update/destroy são permitidos apenas para superuser.
+    def test_destructive_actions_only_admins(self):
+        """Verifica que update/partial_update/destroy são permitidos apenas para usuários administrativos (is_staff).
 
+        A aplicação atual usa `IsAdminUser` para ações destrutivas, que confere `is_staff=True`.
         - member and speaker devem receber 403;
-        - superuser deve conseguir deletar e atualizar.
+        - admin (is_staff=True) deve conseguir deletar e atualizar.
         """
         target = User.objects.create_user(
             email="t2@example.com",
@@ -147,9 +153,9 @@ class UserPermissionsAndHashingTests(APITestCase):
         resp2 = self.client.delete(url)
         self.assertEqual(resp2.status_code, status.HTTP_403_FORBIDDEN)
 
-        # superuser can delete
-        token_su = self.obtain_token("su@example.com", "superpass")
-        self.client.credentials(HTTP_AUTHORIZATION=f"Bearer {token_su}")
+        # admin (is_staff) can delete
+        token_admin = self.obtain_token("admin@example.com", "adminpass")
+        self.client.credentials(HTTP_AUTHORIZATION=f"Bearer {token_admin}")
         resp3 = self.client.delete(url)
         self.assertIn(
             resp3.status_code, (status.HTTP_204_NO_CONTENT, status.HTTP_200_OK)
