@@ -9,7 +9,6 @@ from rest_framework_simplejwt.serializers import TokenRefreshSerializer
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 
 from .models import User
-
 from .serializers import (
     LoginSerializer,
     LogoutSerializer,
@@ -27,10 +26,10 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
     def get_permissions(self):
-        # Allow only super admins to create users via /users (POST)
-        if getattr(self, "action", None) == "create":
-            permission_classes = [IsAuthenticated, IsAdminUser]
-        else:
+        action = getattr(self, "action", None)
+        if action in ("create", "destroy", "update", "partial_update"):
+            permission_classes = [IsAdminUser]
+        elif action in ("list", "retrieve"):
             permission_classes = [IsAuthenticated]
         return [perm() for perm in permission_classes]
 

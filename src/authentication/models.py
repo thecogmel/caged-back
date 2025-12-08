@@ -12,6 +12,11 @@ class User(TimeStampedModel, AbstractBaseUser, PermissionsMixin):
     class Roles(models.TextChoices):
         ADMIN = "ADMIN", "Administrador"
         SUPPORT = "SUPPORT", "Suporte"
+        SPEAKER = "SPEAKER", "Palestra"
+        FINANCE = "FINANCE", "Finanças"
+        FOLLOW_UP = "FOLLOW_UP", "Pós-encontro"
+        REGISTRATION = "REGISTRATION", "Fichas"
+        LOGISTICS = "LOGISTICS", "Montagem"
         MEMBER = "MEMBER", "Membro"
 
     name = models.CharField(max_length=30)
