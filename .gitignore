@@ -55,3 +55,6 @@ build/
 
 # Cache do ruff
 .ruff_cache/
+
+# Environment files
+*.env
